@@ -11,9 +11,10 @@
 ## Setup gitlab CICD
       https://docs.google.com/document/d/1gUCXmUQRYF4Jz-VOTHybeJPelYK7mRJV_Jaqh6WQCO4/edit?usp=sharing
     
-Note : **you can change all envirnment variable accordingly your requirement in - docker-compose**
+Note : **you can change all environment variable accordingly your requirement in - docker-compose**
 
 TODO : **Batch operation and csv genrator need to add in worker**
+       **Need to add all local environment in .env**
 
 
 
