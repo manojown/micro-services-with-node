@@ -1,0 +1,86 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+  zookeeper:
+    image: wurstmeister/zookeeper:latest
+    ports:
+        - "2181:2181"
+  kafka:
+    image: wurstmeister/kafka:2.11-1.1.1
+    ports:
+        - "9092:9092"
+    links:
+        - zookeeper
+    environment:
+        KAFKA_ADVERTISED_HOST_NAME: kafka
+        KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+        KAFKA_AUTO_CREATE_TOPICS_ENABLE: 'true'
+        KAFKA_DELETE_TOPIC_ENABLE: 'true'
+        KAFKA_CREATE_TOPICS: "topic-test:1:1"
+    volumes:
+        - /var/run/docker.sock:/var/run/docker.sock
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: manoj
+      POSTGRES_USER: manoj
+      POSTGRES_DB: employee
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+
+  messageConsumer: #name of the second service
+    image: node:8
+    restart: always # specify the directory of the Dockerfile
+    working_dir: /usr/src/app/
+    command: npm i
+    command: npm start
+    volumes:
+      - ./messageConsumer:/usr/src/app
+    links:
+      - "db"
+      - "kafka"
+    depends_on:
+      - "zookeeper"
+      - "kafka"
+      - "db"
+      
+  queryservice: #name of the second service
+    image: node:8
+    restart: always # specify the directory of the Dockerfile
+    working_dir: /usr/src/app/
+    command: npm i
+    command: npm start
+    volumes:
+      - ./dataQueryApi:/usr/src/app
+    ports:
+      - "3000:3001" #specify ports forewarding #specify ports forewarding
+    links:
+      - "db"
+    depends_on:
+      - "messageConsumer"
+
+  fileUploader: #name of the second service
+    image: node:8
+    restart: always # specify the directory of the Dockerfile
+    working_dir: /usr/src/app/
+    command: npm i
+    command: npm start
+    volumes:
+      - ./fileUploader:/usr/src/app
+    ports:
+      - "3001:3000" #specify ports forewarding #specify ports forewarding
+    links:
+      - "zookeeper"
+      - "kafka"
+    depends_on:
+      - "messageConsumer"
+
+  

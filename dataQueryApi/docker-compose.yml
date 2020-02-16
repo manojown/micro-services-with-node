@@ -1,0 +1,12 @@
+version: '2'
+services:
+  queryservice: #name of the second service
+    image: mhart/alpine-node:8
+    restart: always # specify the directory of the Dockerfile
+    working_dir: /usr/src/app/
+    command: npm i
+    command: npm start
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - "3001:3000" #specify ports forewarding
