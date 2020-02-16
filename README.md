@@ -11,4 +11,10 @@
    
     
 Note : **you can change all envirnment variable accordingly your requirement in - docker-compose**
+
+TODO : **Batch operation and csv genrator need to add in worker**
+
+
+
+
     
