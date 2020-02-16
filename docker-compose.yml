@@ -36,11 +36,10 @@ services:
     ports:
       - 8080:8080
 
-  messageConsumer: #name of the second service
-    image: node:8
+  messageConsumer: #name of the  service
+    image: node:10.19.0-alpine
     restart: always # specify the directory of the Dockerfile
     working_dir: /usr/src/app/
-    command: npm i
     command: npm start
     volumes:
       - ./messageConsumer:/usr/src/app
@@ -52,11 +51,10 @@ services:
       - "kafka"
       - "db"
       
-  queryservice: #name of the second service
-    image: node:8
+  queryservice: #name of the  service
+    image: node:10.19.0-alpine
     restart: always # specify the directory of the Dockerfile
     working_dir: /usr/src/app/
-    command: npm i
     command: npm start
     volumes:
       - ./dataQueryApi:/usr/src/app
@@ -67,11 +65,10 @@ services:
     depends_on:
       - "messageConsumer"
 
-  fileUploader: #name of the second service
-    image: node:8
+  fileUploader: #name of the  service
+    image: node:10.19.0-alpine
     restart: always # specify the directory of the Dockerfile
     working_dir: /usr/src/app/
-    command: npm i
     command: npm start
     volumes:
       - ./fileUploader:/usr/src/app

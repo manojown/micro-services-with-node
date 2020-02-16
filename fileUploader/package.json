@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "npm install && node ./bin/www"
   },
   "dependencies": {
     "batch-promises": "0.0.3",
