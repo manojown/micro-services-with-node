@@ -1,6 +1,6 @@
 # micro-services-with-node
 
-## postman collection link (all routes details you can find here
+## postman collection link (all routes details you can find it here)
   https://www.getpostman.com/collections/96d0533f2248fffaab51
   
 ## for Deploying
