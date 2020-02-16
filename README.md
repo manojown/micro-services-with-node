@@ -8,7 +8,8 @@
     step - 1 : Go to project directory
     step - 2 : docker-compose up or docker-compose up -d
 
-   
+## Setup gitlab CICD
+      https://docs.google.com/document/d/1gUCXmUQRYF4Jz-VOTHybeJPelYK7mRJV_Jaqh6WQCO4/edit?usp=sharing
     
 Note : **you can change all envirnment variable accordingly your requirement in - docker-compose**
 
